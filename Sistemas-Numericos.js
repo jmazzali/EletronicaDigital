@@ -1,47 +1,110 @@
 const octal = 12345670 //Número a ser convertido
 
-const octalArray = octal.toString().split('') //Converte o número octal em string e o separa a cada caractere
-var octalBin = '' //Variável para correspondente em binário
-var BinDigito //Variável para correspondente de cada dígito
+function BasesEmBinario(num, base){
+    let NumArray = num.toString().split('')
+    let NumBin = ''
+    let NumDigito
 
-octalArray.forEach(function(octalArray){ //Para cada caractere da string vai percorrer essa função
-    BinDigito = '' //A cada início reseta a variável
+    if(base != 8 && base != 16)
+        return 'Base não aceita'
+    else if(base == 8)
+        base = 3 //se octal, cada dígito octal representa 3 dígitos binário
+    else
+        base = 4 //cada dígito hexa necessita de até 4 dígitos binário
 
-    while(octalArray >= 2) //Enquanto o numerador for maior que o denominador (para base binário é 2)
-    {
-        BinDigito = octalArray%2 + BinDigito //O correspondente do dígito recebe a sobra da divisão do atual numerador/2
-        octalArray = Math.floor(octalArray/2) //Próximo numerador será a aproximação da divisão numerador/2
-    }
-    if(octalArray == 1)
-        BinDigito = '1' + BinDigito //Se a sobra for 1, adicioná-lo na frente do correspondente daquele dígito
+    NumArray.forEach(function(NumArray){
+        NumDigito = ''
 
-    while(BinDigito.length < 3)
-        BinDigito = '0' + BinDigito //Enquanto não atingir três dígitos adicionar 0's a esquerda (octal 0 até 7 em binário 000 até 111)
+        switch(NumArray) //switch para hexadecimal
+            {
+                case 'A':
+                    NumArray = 10
+                    break;
+                case 'B':
+                    NumArray = 11
+                    break;
+                case 'C':
+                    NumArray = 12
+                    break;
+                case 'D':
+                    NumArray = 13
+                    break;
+                case 'E':
+                    NumArray = 14
+                    break;
+                case 'F':
+                    NumArray = 15
+        }
+        while(NumArray >= 2)
+        {
+            NumDigito = NumArray%2 + NumDigito
+            NumArray = Math.floor(NumArray/2)
+        }
 
-    octalBin = octalBin + BinDigito //Correspondente em binário recebe o correspondente do dígito a cada loop
-})
-console.log(octal + '(8) -> ' + octalBin +'(2)')
+        if(NumArray == 1)
+            NumDigito = '1' + NumDigito
 
-function BinarioEmDecimal(bin){
-    let BinArray = bin.toString().split('') //Recebe o valor pela função e o divide
-    let BinArrayN = BinArray.length //Define quantas caracteres tem esta string
-    let BinDecimal = 0 //Vai armazenar o correspondente em decimal
+        while(NumDigito.length < base)
+            NumDigito = '0' + NumDigito
 
-    BinArray.forEach(function(BinArray){
-        BinDecimal += BinArray * 2 ** (BinArrayN-1) //Incrementa a cada caractere (começa do extremo esquerdo)
-        BinArrayN -= 1 //Diminui a base até chegar em 0 (apenas números inteiros)
+        NumBin = NumBin + NumDigito
     })
-    return BinDecimal
+    return NumBin
 }
 
-console.log(BinarioEmDecimal(11011))
+console.log('12345670 (octal) em binário: ' + BasesEmBinario(12345670, 8))
+console.log('54A (hexadecimal) em binário: ' + BasesEmBinario('54A', 16))
+
+function BasesEmDecimal(num, base){
+    let NumArray = num.toString().split('') //Recebe o valor pela função e o divide
+    let NumArrayN = NumArray.length //Define quantas caracteres tem esta string
+    let NumDecimal = 0 //Vai armazenar o correspondente em decimal
+
+    NumArray.forEach(function(NumArray){
+        switch(NumArray) //switch para hexadecimal
+            {
+                case 'A':
+                    NumArray = 10
+                    break;
+                case 'B':
+                    NumArray = 11
+                    break;
+                case 'C':
+                    NumArray = 12
+                    break;
+                case 'D':
+                    NumArray = 13
+                    break;
+                case 'E':
+                    NumArray = 14
+                    break;
+                case 'F':
+                    NumArray = 15
+        }
+        NumDecimal += NumArray * base ** (NumArrayN-1) //Incrementa a cada caractere (começa do extremo esquerdo)
+        NumArrayN -= 1 //Diminui a base até chegar em 0 (apenas números inteiros)
+    })
+    return NumDecimal
+}
+
+console.log('11011 (bin) em decimal: ' + BasesEmDecimal(11011,2))
+console.log('75624 (octal) em decimal:' + BasesEmDecimal(75624,8))
+console.log('2A (hexadecimal) em decimal: ' + BasesEmDecimal('2A',16))
 
 function BinarioParaDemaisBases(bin, base){
     let BinArray = bin.toString() //Transforma o número recebido pela função em string
     let BinBase = '' //Variável responsável por armazenar correspondente do binário no sistema 2^base
     let BinArrayDiv = '' //BinArray só que com divisorias a cada "base" caracteres
-    let baseT = base-1 //Expoente inicial de cada grupo do BinArrayDiv
     let aux = 0 //Armazena o correspondente de cada grupo do BinArrayDiv
+
+    if(base != 8 && base != 16)
+        return 'Base não aceita'
+    else if(base == 8)
+        base = 3 //se para octal, a cada 3 dígito binários se deve encontrar 1 correspondente de octal
+    else
+        base = 4 //a cada 4 dígito binários se deve encontrar 1 correspondente de hexadecimal
+
+    let baseT = base-1 //Expoente inicial de cada grupo do BinArrayDiv
 
     while(BinArray.length % base != 0) //Enquanto o binário não possuir a quantidade de dígitos como um múltiplo da base
         BinArray = '0' + BinArray //Acrescenta-se 0's a esquerda
@@ -90,7 +153,9 @@ function BinarioParaDemaisBases(bin, base){
     return BinBase
 }
 
-console.log(BinarioParaDemaisBases(110001,3))
-console.log(BinarioParaDemaisBases(110001,4))
-console.log(BinarioParaDemaisBases(110011101101,3))
-console.log(BinarioParaDemaisBases(110011101101,4))
+console.log('11001 (bin) em octal: ' + BinarioParaDemaisBases(110001,8))
+console.log('11001 (bin) em hexadecimal: ' + BinarioParaDemaisBases(110001,16))
+console.log('110011101101 (bin) em octal: ' + BinarioParaDemaisBases(110011101101,8))
+console.log('110011101101 (bin) em hexadecimal: ' +BinarioParaDemaisBases(110011101101,16))
+
+console.log('452 (octal) em binário: ' + BasesEmBinario(452, 8) + ' (binário) em hexadecimal: ' + BinarioParaDemaisBases(BasesEmBinario(452,8),16))
