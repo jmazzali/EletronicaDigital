@@ -1,5 +1,3 @@
-const octal = 12345670 //Número a ser convertido
-
 function BasesEmBinario(num, base){
     let NumArray = num.toString().split('')
     let NumBin = ''
