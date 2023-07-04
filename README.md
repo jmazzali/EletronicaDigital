@@ -5,7 +5,8 @@ Repositório destinado a anotações de conceitos de eletrônica digital
 Tópicos
 -
 
-**`Sistemas Numéricos`** 
+### **Sistemas Numéricos** 
+[*Arquivo em js*](./Sistemas-Numericos.js)
 
 Conversão para binário: 
 ```
@@ -18,11 +19,10 @@ Exemplo: 801 em octal representa 111000001 em binário - sendo que 8 representa 
 
 *Detalhe*: observando a base binária percebe-se os diferentes pesos para cada dígito (assim como no decimal, no qual partimos de unidade e passamos por dezena, centena, milhar e etc.), portanto se pode entender que diferentes bases requisitam diferentes quantidades de dígitos. `Octal requisita 3 bits` [2^3 de possibilidades] (000 - sendo o zero - até 111 - sendo o oito). `Hexadecimal requisita 4`  [2^4 de possibilidades] (0000 - zero - até 1111 - 15 ou F).
 
-[*Clique aqui*](./Sistemas-Numericos.js)
+### **Portas Lógicas**
+[*Arquivo em js*](./Portas-Logicas.js)
 
-**`Portas Lógicas`**
-
-**`Propriedades e Teoremas da Álgebra Booleana`***
+### **Propriedades e Teoremas da Álgebra Booleana**
 
 |  | Teorema (AND) | Teorema (OR) |
 |:-:|:-:|:-:|
@@ -41,7 +41,7 @@ Distributiva: Referente a coluna OR é mais aceitável por conta de funcionar ta
 
 Teorema De Morgan: Define que uma negação pode ser "quebrada" desde que a operação se inverta - como se a negação da soma seja a multiplicação e vice versa.
 
-**`Simplificações/Reduções`**
+### **Simplificações/Reduções**
 
 MINTermos e MAXTermos
 
@@ -55,6 +55,58 @@ Nesse caso é definido que a análise estará direcionada às saídas de alto n�
 
 Aqui se analisa as saídas de baixo nível. Cada linha terá sua `expressão` como a `soma das entradas` (entradas de **alto** nível entram como **negadas**, enquanto de **baixo** nível lógico entram **constante**). Ao final, `multiplica-se as expressões` obtidas (porta AND).
 
-**`Mapa Karnaugh`**
+### **Mapa Karnaugh**
+[*Arquivo em js*](./Mapa-Karnaugh.js)
+
+### **Projeto: Decodificador 7-Display-Segment**
+
+Para este caso foi entendido que sua aplicação, visto os recursos disponíveis, seria apenas possível em um simulador - **LogSim** foi o utilizado.
+
+#### **Esquematização**
+
+Inicialmente foi construído uma tabela verdade para compreender o status de cada segmento de acordo com a entrada binária.
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/7_segment_display_labeled.svg/1200px-7_segment_display_labeled.svg.png" alt="7-Display-Segment" width="400" height="400">
+
+
+|BIT 4|BIT 3|BIT 2|BIT 1|a|b|c|d|e|f|g|
+|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+|**0**|**0**|**0**|**0**|||||||0|
+|**0**|**0**|**0**|**1**||1|1|||||
+|**0**|**0**|**1**|**0**|||0|||0||
+|**0**|**0**|**1**|**1**|||||0|0||
+|**0**|**1**|**0**|**0**|0|||0|0|||
+|**0**|**1**|**0**|**1**||0|||0|||
+|**0**|**1**|**1**|**0**||0||||||
+|**0**|**1**|**1**|**1**|1|1|1|||||
+|**1**|**0**|**0**|**0**|1|1|1|1|1|1|1|
+|**1**|**0**|**0**|**1**|||||0|||
+|**1**|**0**|**1**|**0**||||0||||
+|**1**|**0**|**1**|**1**|0|0||||||
+|**1**|**1**|**0**|**0**||0|0||||0|
+|**1**|**1**|**0**|**1**|0|||||0||
+|**1**|**1**|**1**|**0**||0|0|||||
+|**1**|**1**|**1**|**1**||0|0|0||||
+
+Após o término da tabela verdade, realizou-se a redução da função através da construção de um Mapa de Karnaugh para cada saída e então foi obtido:
+
+````
+a: (B4' + B3' + B2 + B1') * (B4' + B3 + B2' + B1') * (B4 + B3 + B2 + B1') * (B4 + B3' + B2 + B1)
+
+b: (B4' + B2' + B1') * (B4' + B3' + B1) * (B3' + B2' + B1) * (B4 + B3' + B2 + B1')
+
+c: (B4' + B3' + B2') * (B4' + B3' + B1) * (B4 + B3 + B2' + B1)
+
+d: (B4 + B3' + B2 + B1) * (B4' + B3 + B2' + B1) * (B3' + B2' + B1') * (B4 + B3 + B2 + B1')
+
+e: (B4 + B3 + B1') * (B4 + B3' + B2) * (B3 + B2 + B1') * (B4 + B2' + B1')
+
+f: (B4 + B3 + B1') * (B4 + B3 + B2') * (B4 + B2' + B1') * (B4' + B3' + B2 + B1')
+
+g: (B2 * B1') + (B4 * B3') + (B4 * B1) + (B3' * B2) + (B4' * B3 * B2')
+
+````
+
+**`Projeto: Computer Clock`**
 
 ---
