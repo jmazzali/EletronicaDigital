@@ -107,6 +107,79 @@ g: (B2 * B1') + (B4 * B3') + (B4 * B1) + (B3' * B2) + (B4' * B3 * B2')
 
 ````
 
-**`Projeto: Computer Clock`**
+### **Projeto: Acionamento de motor e alarme de carro**
+
+|Embreagem|Chave Partida|PARTIDA|
+|:---:|:---:|:---:|
+|**0**|**0**|0|
+|**0**|**1**|0|
+|**1**|**0**|0|
+|**1**|**1**|1|
+
+`MOTOR(PARTIDA) = Embreagem * Chave Partida`
+
+|Motor|Porta|Cinto|Farol|ALARME|LED|
+|:---:|:---:|:---:|:---:|:---:|:---:|
+|**0**|**0**|**0**|**0**|0|0|
+|**0**|**0**|**0**|**1**|0|1|
+|**0**|**0**|**1**|**0**|0|0|
+|**0**|**0**|**1**|**1**|0|1|
+|**0**|**1**|**0**|**0**|0|1|
+|**0**|**1**|**0**|**1**|0|1|
+|**0**|**1**|**1**|**0**|0|1|
+|**0**|**1**|**1**|**1**|0|1|
+|**1**|**0**|**0**|**0**|0|0|
+|**1**|**0**|**0**|**1**|0|0|
+|**1**|**0**|**1**|**0**|1|0|
+|**1**|**0**|**1**|**1**|1|0|
+|**1**|**1**|**0**|**0**|1|0|
+|**1**|**1**|**0**|**1**|1|0|
+|**1**|**1**|**1**|**0**|1|1|
+|**1**|**1**|**1**|**1**|1|1|
+
+```
+Porta (0) = Fechada; Porta(1) = Aberta
+
+Cinto (0) = Em uso; Cinto(1) = Solto
+
+Farol (0) = Apagado; Farol(1) = Aceso
+```
+
+`ALARME = (Motor * Cinto) + (Motor * Porta)`
+
+`LED = (Motor' * Farol) + (Motor' * Porta)`
+
+Sem o acionamento do motor, alertar que há algo de errado apenas com o LED.
+
+Com o motor ligado, alertar com apenas alarme quando porta ou cinto inadequados e com duplo alerta (alarme + led) quando porta e cinto inadequados.
+
+*Necessita acionar uma memória, senão será necessário manter a chave na posição correta e a embreagem acionada para o motor não desligar.*
+
+* **Clock**
+
+A fim de entender como salvar um bit de memória, deve-se compreender primeiramente o que é o clock. 
+
+O clock se trata de um sistema oscilador (de maneira visual seria uma função de onda quadrada) que se torna um input para alguns circuitos integrados; sendo assim ele se torna responsável no processo de alterar o estado de um bit de memória (HIGH state ou LOW state)
+
+* **Flip-Flop (Tipo D)**
+
+O flip-flop possui diferentes conceitos/modelos cada um para sua utilidade.
+
+````
+"D" (data) funciona para armazenar dados;
+"T".
+````
+
+Esses modelos tipicamente possuem o sinal de clock e podem variar acerca da quantidade de sinais de entrada e de saída. Quanto as saídas, elas se resumem a no máximo 2 - na qual uma pode ser o complemento/negação da outra; já as entradas podem variar de acordo com o modelo específico.
+
+O flip-flop do tipo "D" pode possuir até 3 diferentes entradas, sendo elas: entrada de dado, set e reset (um definindo a memória como 0 e o outro como 1 - variam de modelos). A saída é atualizada após cada subida do clock e de acordo com o input de dado - sendo que D(entrada) = Q-next(saída após uma borda de subida no clock) ou que Q-next = Q(quando o clock não está constante).
+
+**por isso também pode ser conhecido como delay flip-flop*
+
+No entanto para a ideia desse projeto será necessário apenas a entrada de set ou reset, pois assim é possível alterar o estado de memória (que salvará se o motor está ligado ou não) com o acionamento de uma dessas entradas; para encerrar o motor será necessário um interruptor para ativar a outra entrada (se *set* ativa, *reset* desativa - ou vice versa).
+
+<img src="img/FlipFlop_TipoD_SetReset.png" alt="Exemplo de flip flop utilizando apenas entradas Set/Reset" width="500" height="350">
+
+* **Registradores**
 
 ---
