@@ -178,8 +178,29 @@ O flip-flop do tipo "D" pode possuir até 3 diferentes entradas, sendo elas: ent
 
 No entanto para a ideia desse projeto será necessário apenas a entrada de set ou reset, pois assim é possível alterar o estado de memória (que salvará se o motor está ligado ou não) com o acionamento de uma dessas entradas; para encerrar o motor será necessário um interruptor para ativar a outra entrada (se *set* ativa, *reset* desativa - ou vice versa).
 
-<img src="img/FlipFlop_TipoD_SetReset.png" alt="Exemplo de flip flop utilizando apenas entradas Set/Reset" width="500" height="350">
+<img src="img/flipFlopDSetReset.png" alt="Exemplo de flip flop utilizando apenas entradas Set/Reset" width="330" height="220">
 
 * **Registradores**
+
+A utilização do flip-flop sem conexão com outros circuitos lógicos faz com que o dado sempre se atualize de acordo com o barramento de dados a cada borda de clock. Com o intuito de utilizá-lo para construir memórias capazes de armazenar diferentes dados (exemplo: armazenar o número 6 exigiria 3 flip-flop's, no entanto nem todos deveriam armazenar o mesmo bit) é implementado um circuito lógico que apresenta um novo barramento, o de load.
+
+Esse novo bit a ser enviado definirá se o dado que está no barramento de dados será salvo naquela flip-flop (Q-next = D) ou então o flip-flop manterá o dado anterior (Q-next = Q).
+
+<img src="img/registradorFlipFlopD.png" alt="Registrador utilizando portas lógicas e flip-flop" width="530" height="300">
+
+|Barramento de dados|Load|Q|Q-next|
+|:---:|:---:|:---:|:---:|:---:|
+|0|0|0|0|
+|0|0|1|1|
+|0|1|0|0|
+|0|1|1|0|
+|1|0|0|0|
+|1|0|1|1|
+|1|1|0|1|
+|1|1|1|1|
+
+Portanto, observa-se que o flip-flop agora é capaz de manter seu próprio bit mesmo quando o barramento de dados altera seu valor - tornando possível construir uma memória. Assim se torna possível armazenar representações binárias que então podem passar por decodificadores e chegarem na base desejada.
+
+<img src="img/registradorRepresentacaoBinaria.png" alt="Armazenando em memória o dígito 6 (base decimal)" width="450" height="450">
 
 ---
