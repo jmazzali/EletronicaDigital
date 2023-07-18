@@ -155,30 +155,56 @@ Com o motor ligado, alertar com apenas alarme quando porta ou cinto inadequados 
 
 *Necessita acionar uma memória, senão será necessário manter a chave na posição correta e a embreagem acionada para o motor não desligar.*
 
+* **Circuitos Sequencias**
+
+Diferentemente dos circuitos combinacionais vistos anteriormente, o qual depende apenas e exclusivamente dos estados lógicos das entradas, os sequenciais são dependentes da sua *própria saída* (como uma realimentação).
+
+Todos circuitos sequencias podem ser conhecidos pela sua **memorização**, um exemplo simples de memória - de certa forma ineficaz - é uma porta OR com 2 entradas: uma independente e a outra a saída da própria porta. 
+
+<img src="img/SequencialSimples.png" alt="Flip-flop SR Latch" width="280" height="110">
+
+Iniciando este exemplo com baixo nível lógico a saída será igual a entrada sem dependência; ao subir o estado lógico para alto a saída passará para alto também. Ao reduzir o nível de input para baixo a saída continuará como alta; isso pode ser facilmente comprovado pelo postulado `A + 1 = 1`. Portanto, pode-se compreender como uma memória que armazena se determinada **entrada**, pelo menos uma vez, *esteve* em **alto** estado lógico.
+
 * **Clock**
 
 A fim de entender como salvar um bit de memória, deve-se compreender primeiramente o que é o clock. 
 
-O clock se trata de um sistema oscilador (de maneira visual seria uma função de onda quadrada) que se torna um input para alguns circuitos integrados; sendo assim ele se torna responsável no processo de alterar o estado de um bit de memória (HIGH state ou LOW state)
+O clock se trata de um sistema oscilador (de maneira visual seria uma função de onda quadrada) utilizado para sincronizar e controlar o fluxo de operações em sistemas digitais. Nos circuitos integrados funciona como uma `entrada/input habilitadora`, sendo essencial no processo de *ativar* as portas lógicas presentes no CI.
 
-* **Flip-Flop (Tipo D)**
+<img src="https://www.electronicshub.org/wp-content/uploads/2015/05/Clocked-SR-flip-–-flop-using-NOR-gates.jpg" alt="Clock funcionando como habilitador de CI" width="400" height="240">
 
-O flip-flop possui diferentes conceitos/modelos cada um para sua utilidade.
+*as duas portas à esquerda representam a ativação (clock coincide, obviamente, nas duas), enquanto as portas NOR representam um CI*
+
+
+* **Flip-Flop's**
+
+Os flip-flop's podem possuir diferentes conceitos/modelos.
 
 ````
-"D" (data) funciona para armazenar dados;
-"T".
+"SR" (set/reset) acionar e desacionar saída;
+"D" (data) armazenar dados;
+"JK".
 ````
 
 Esses modelos tipicamente possuem o sinal de clock e podem variar acerca da quantidade de sinais de entrada e de saída. Quanto as saídas, elas se resumem a no máximo 2 - na qual uma pode ser o complemento/negação da outra; já as entradas podem variar de acordo com o modelo específico.
 
-O flip-flop do tipo "D" pode possuir até 3 diferentes entradas, sendo elas: entrada de dado, set e reset (um definindo a memória como 0 e o outro como 1 - variam de modelos). A saída é atualizada após cada subida do clock e de acordo com o input de dado - sendo que D(entrada) = Q-next(saída após uma borda de subida no clock) ou que Q-next = Q(quando o clock não está constante).
+**Flip-Flop SR**
+|SET|RESET|Q-next|
+|:---:|:---:|:---:|
+|**0**|**0**|Q|
+|**0**|**1**|0|
+|**1**|**0**|1|
+|**1**|**1**|Indeterminada|
 
-**por isso também pode ser conhecido como delay flip-flop*
+Para set e reset em **baixo nível lógico**, temos o flip-flop funcionando em estado de **memória** - mantendo o nível lógico previamente salvo; a entrada *(1,1)* se trata de uma ocasião *inválida* e que deve ser evitada.
 
-No entanto para a ideia desse projeto será necessário apenas a entrada de set ou reset, pois assim é possível alterar o estado de memória (que salvará se o motor está ligado ou não) com o acionamento de uma dessas entradas; para encerrar o motor será necessário um interruptor para ativar a outra entrada (se *set* ativa, *reset* desativa - ou vice versa).
+**Flip-Flop D**
 
-<img src="img/flipFlopDSetReset.png" alt="Exemplo de flip flop utilizando apenas entradas Set/Reset" width="330" height="220">
+O flip-flop do tipo "D" pode possuir até 3 diferentes entradas, sendo elas: entrada de dado, set e reset (um definindo a memória como 0 e o outro como 1 - variam de modelos). A saída é atualizada após cada subida do clock e de acordo com o input de dado - sendo que D(entrada) = Q-next(saída após uma borda de subida no clock) ou que Q-next = Q(quando o clock está constante ou em borda de descida).
+
+Para a concepção do **Projeto: Acionamento de motor e alarme de carro**, o necessário seria um `flip-flop SR`. Através da alteração do nível lógico das entradas seria possível alterar o estado de memória (que salvará se o motor está ligado ou não). Para encerrar o motor será necessário um interruptor para ativar a outra entrada (se *set* ativa, *reset* desativa - ou vice versa).
+
+<img src="img/FlipFlopSR.png" alt="Flip-flop SR" width="450" height="80">
 
 * **Registradores**
 
@@ -186,21 +212,21 @@ A utilização do flip-flop sem conexão com outros circuitos lógicos faz com q
 
 Esse novo bit a ser enviado definirá se o dado que está no barramento de dados será salvo naquela flip-flop (Q-next = D) ou então o flip-flop manterá o dado anterior (Q-next = Q).
 
-<img src="img/registradorFlipFlopD.png" alt="Registrador utilizando portas lógicas e flip-flop" width="530" height="300">
+<img src="img/RegistradorFlipFlopD.png" alt="Registrador utilizando portas lógicas e flip-flop" width="700" height="110">
 
 |Barramento de dados|Load|Q|Q-next|
-|:---:|:---:|:---:|:---:|:---:|
-|0|0|0|0|
-|0|0|1|1|
-|0|1|0|0|
-|0|1|1|0|
-|1|0|0|0|
-|1|0|1|1|
-|1|1|0|1|
-|1|1|1|1|
+|:---:|:---:|:---:|:---:|
+|**0**|**0**|0|0|
+|**0**|**0**|1|1|
+|**0**|**1**|0|0|
+|**0**|**1**|1|0|
+|**1**|**0**|0|0|
+|**1**|**0**|1|1|
+|**1**|**1**|0|1|
+|**1**|**1**|1|1|
 
 Portanto, observa-se que o flip-flop agora é capaz de manter seu próprio bit mesmo quando o barramento de dados altera seu valor - tornando possível construir uma memória. Assim se torna possível armazenar representações binárias que então podem passar por decodificadores e chegarem na base desejada.
 
-<img src="img/registradorRepresentacaoBinaria.png" alt="Armazenando em memória o dígito 6 (base decimal)" width="450" height="450">
+<img src="img/Registrador3Bits.png" alt="Armazenando em memória o dígito 110 (6 na base decimal)" width="870" height="300">
 
 ---
