@@ -219,7 +219,7 @@ Para data = 0, set será 0 e reset 1. Assim armazenando 0
 Para data = 1, set será 1 e reset 0. Assim armazenando 1.
 ```
 
-<img src="img/DwFlipFlopSR.png" alt="Latch D com Flip-Flop SR" width="400" height="240">
+<img src="img/DwFlipFlopSR.png" alt="Latch D com Flip-Flop SR" width="580" height="190">
 
 Esse exemplo demonstra um **Latch D**, sua diferença é que o seu estado, de memorizar ou armazenar, depende do **nível de entrada** do enable/clock (0: armazena; 1: salva o dado); enquanto que no flip-flop a transição para armazenar o dado ocorre quando há uma borda de subida (se a entrada for negada, a atualização ocorre na descida).
 
@@ -247,18 +247,11 @@ Para a concepção do **Projeto: Acionamento de motor e alarme de carro**, o nec
 
 * **Registradores**
 
-Componentes utilizados:
-
-- Clock (+400 pinos de protoboard)
-- Resistores (R1 e R2): 1k para R1 (corrente apenas na recarga) e 100k (potenciometro - recarga e descarga)
-- Capacitores (C, C1 e C2): 1uF (capacitor a influenciar no ciclo do clock), 10nF e 100nF (C1 e C2 - a fim de reduzir ruídos nas bordas de subida)
-- Não obrigatórios: LED e resistor limitador de corrente (para observar a saída do temporizador de maneira visual)
-
 A utilização do flip-flop sem conexão com outros circuitos lógicos faz com que o dado sempre se atualize de acordo com o barramento de dados a cada borda de clock. Com o intuito de utilizá-lo para construir memórias capazes de armazenar diferentes dados (exemplo: armazenar o número 6 exigiria 3 flip-flop's, no entanto nem todos deveriam armazenar o mesmo bit) é implementado um circuito lógico que apresenta um novo barramento, o de load.
 
 Esse novo bit a ser enviado definirá se o dado que está no barramento de dados será salvo naquela flip-flop (Q-next = D) ou então o flip-flop manterá o dado anterior (Q-next = Q).
 
-<img src="img/RegistradorFlipFlopD.png" alt="Registrador utilizando portas lógicas e flip-flop" width="700" height="110">
+<img src="img/Registrador1Bit.png" alt="Registrador utilizando portas lógicas e flip-flop" width="700" height="110">
 
 |Barramento de dados|Load|Q|Q-next|
 |:---:|:---:|:---:|:---:|
@@ -287,6 +280,16 @@ Componentes utilizados:
 Para iniciar a construção de pequenos projetos se deve inicialmente se atentar em como será realizada a **alimentação** do mesmo (o qual será inserido em uma matriz de contato - conhecido também como protoboard); a opção inicialmente selecionada se trata da utilização de um carregador de celular, assim aproveitando sua construção interna* para aproveitar **5V de saída****.
 
 `*`Transformador: responsável por diminuir a tensão de entrada; Retificador: responsável por transformar sinal AC em DC
+
 `**`Deve-se atentar a corrente máxima permitida, visto que tais aparelhos são mais limitados em comparação com fontes dedicadas e ajustáveis
+
+
+**Problemas**
+
+- **Flutuação**
+
+Entradas podem sofrer alterações, sendo assim capaz de afetar a lógica de ser aplicada nos CI's, uma vez que uma tensão diferente pode influenciar os transistores a trabalharem de um modo diferente. Isso ocorre com  as portas lógicas, onde há a necessidade da inserir resistores de pull-down - para assim, evitar tais flutuações e evitar falhas em sua saída.
+
+Outra flutuação que pode ocorrer na prática se trata da entrada de reset no CI do flip-flop do tipo D (a qual ocorre com ativação em baixo nível). Para a solução deste caso foi necessário colocar o reset (MR') em 5V.
 
 ---
