@@ -117,4 +117,4 @@ Sendo assim, a função final é definida como: d1 * d2 * d3 * individual
 (A+C+D') * (A'+C+D) * (A+C'+D) * (A'+B+C'+D')
 ```
 
-[Voltar](02-PortasEPropriedades.md) / [Continuar]()
+[Voltar](02-PortasEPropriedades.md) / [Continuar](04-CircuitoSeq.md)
