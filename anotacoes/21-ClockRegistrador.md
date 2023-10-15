@@ -30,7 +30,7 @@ A utilização do flip-flop sem conexão com outros circuitos lógicos faz com q
 
 Esse novo bit, específico para cada flip-flop, a ser enviado definirá se o dado que está no barramento de dados será salvo naquele flip-flop (Q-next = D) ou então o flip-flop manterá o dado anterior (Q-next = Q).
 
-<img src="img/Registrador1Bit.png" alt="Registrador utilizando portas lógicas e flip-flop" width="700" height="110">
+<img src="../img/Registrador1Bit.png" alt="Registrador utilizando portas lógicas e flip-flop" width="700" height="110">
 
 |Barramento de dados|Load|Q|Q-next|
 |:---:|:---:|:---:|:---:|
@@ -45,7 +45,7 @@ Esse novo bit, específico para cada flip-flop, a ser enviado definirá se o dad
 
 Portanto, observa-se que o flip-flop agora é capaz de manter seu próprio bit mesmo quando o barramento de dados altera seu valor - tornando possível construir uma memória. Assim se torna possível armazenar representações binárias que então podem passar por decodificadores e chegarem na base desejada.
 
-<img src="img/Registrador3Bits.png" alt="Armazenando em memória o dígito 110 (6 na base decimal)" width="870" height="300">
+<img src="../img/Registrador3Bits.png" alt="Armazenando em memória o dígito 110 (6 na base decimal)" width="870" height="300">
 
 - **Flutuação**
 
