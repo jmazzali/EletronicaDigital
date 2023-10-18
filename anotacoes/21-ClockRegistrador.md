@@ -21,6 +21,7 @@ Para iniciar a construção de pequenos projetos se deve inicialmente se atentar
 <a href="https://youtu.be/SPccMGu4pHI">
     <img src="../img/VideoRegistrador.png" width="540" height="300" alt="Registrador de 3 Bits">
 </a>
+
 Componentes utilizados:
 
 - Sinal de clock;
