@@ -16,8 +16,11 @@ Para iniciar a construção de pequenos projetos se deve inicialmente se atentar
 
 ## **Projeto: Registrador**
 
-[![Registrador de 3 Bits](https://i9.ytimg.com/vi/SPccMGu4pHI/mqdefault.jpg?sqp=CNizsakG-oaymwEmCMACELQB8quKqQMa8AEB-AHUBoAC4AOKAgwIABABGHIgVig6MA8=&rs=AOn4CLDQo2Ua6rNMzOXM-T2YTi0_XMe6sA)](https://youtu.be/SPccMGu4pHI "Registrador | 3 BITS")
+### **Vídeo:**
 
+<a href="https://youtu.be/SPccMGu4pHI">
+    <img src="../img/VideoRegistrador.png" width="540" height="300" alt="Registrador de 3 Bits">
+</a>
 Componentes utilizados:
 
 - Sinal de clock;
@@ -67,4 +70,4 @@ Cada circuito a ser integrado ao registrador pode apresentar diferentes resoluç
 
 **FIXED POINT**: um bit será destinado a identificar o valor de sinal (**+**[1] ou **-**[0]), um byte para o dígito a esquerda da vírgula (parte inteira) enquanto outros 2 bytes para os valores a direita (parte fracionária).
 
-[Voltar](12-PartidaEAlarme.md) / [Continuar](21-ClockRegistrador.md)
+[Voltar](12-PartidaEAlarme.md) / [Continuar](22-Mux4p1.md)
