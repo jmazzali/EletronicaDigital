@@ -19,5 +19,6 @@ Repositório destinado ao estudo de conceitos da eletrônica digital
 ### Na prática
 
 1. [Registrador de 3 bits com uso de clock](./anotacoes/21-ClockRegistrador.md)
+2. [Multiplexador 4:1](./anotacoes/22-Mux4p1.md)
 
 ---
