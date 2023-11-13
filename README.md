@@ -10,6 +10,9 @@ Repositório destinado ao estudo de conceitos da eletrônica digital
 2. [Portas lógicas e Propriedades da lógica booleana](./anotacoes/02-PortasEPropriedades.md)
 3. [Simplificação e redução de funções](./anotacoes/03-Simplificacao.md)
 4. [Circuitos sequencias](./anotacoes/04-CircuitoSeq.md)
+5. [Multiplexadores](./anotacoes/05-Multiplexadores.md)
+6. [Adder](./anotacoes/06-Adder.md)
+7. [Bit Comparator](./anotacoes/07-BitComparator.md)
 
 ### Simulando
 
