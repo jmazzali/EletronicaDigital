@@ -84,4 +84,4 @@ Trata-se de uma evolução do tipo Set/Reset, a qual não apresenta mais a condi
 
 <img src="../img/JKwFlipFlopSR.png" alt="JK através do uso de um flip-flop SR" width="460" height="160">
 
-[Voltar](03-Simplificacao.md) / [Continuar](11-Decodificador.md)
+[Voltar](03-Simplificacao.md) / [Continuar](05-Multiplexadores.md)

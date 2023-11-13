@@ -62,3 +62,5 @@ Após conceituar a ideia e apresentar as funções, chega-se em uma conclusão: 
 Tal implementação pode ser dada por um simples flip-flop SR, no qual a entrada **set** pode ser definida por meio da função descrita acima e o **reset** ser acionado pela descrita pelo estado 2.
 
 <img src="../img/ChaveEmbreagem.png" alt="Flip-flop SR para exemplo" width="450" height="130">
+
+[Voltar](11-Decodificador.md) / [Continuar](21-ClockRegistrador.md)

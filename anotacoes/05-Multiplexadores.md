@@ -205,7 +205,7 @@ Assim chegando em:
 
 <img src="../img/DEMUX1p4.gif">
 
-[Voltar](04-CircuitoSeq.md) / [Continuar](05-Multiplexadores.md)
+[Voltar](04-CircuitoSeq.md) / [Continuar](06-Adder.md)
 
 ---
 

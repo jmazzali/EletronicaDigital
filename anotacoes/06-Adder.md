@@ -190,3 +190,5 @@ Outra forma de solucionar seria descartando as duplas d2 e d3, obtendo então D1
 O último modelo de circuito é comumente visto uma vez que possibilita reaproveitar a saída da XOR, inicialmente pensada para a saída *sum*, na formação de um full adder. De tal maneira a esquematização unitária de circuito desses, contendo 2 bits e o bit de carry, se assemelha ao circuito a seguir.
 
 <img src="../img/Adder.png" height="320">
+
+[Voltar](05-Multiplexadores.md) / [Continuar](07-BitComparator.md)

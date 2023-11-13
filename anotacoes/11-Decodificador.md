@@ -54,7 +54,7 @@ g: (B2 * B1') + (B4 * B3') + (B4 * B1) + (B3' * B2) + (B4' * B3 * B2')
 
 <img src="../img/7Segmentos.png" alt="7 Segmentos" width="600" height="310">
 
-[Voltar](04-CircuitoSeq.md) / [Continuar](12-PartidaEAlarme.md)
+[Voltar](07-BitComparator.md) / [Continuar](12-PartidaEAlarme.md)
 
 ---
 
